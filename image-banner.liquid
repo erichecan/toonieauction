@@ -1,0 +1,452 @@
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  /* Banner height settings */
+  #Banner-{{ section.id }} {
+    height: {{ section.settings.mobile_banner_height }}px;
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.desktop_content_position | split: '-' | last }};
+    position: relative; /* Ensure banner div is a positioning context */
+    width: 100%;
+    overflow: hidden; /* Hide any overflow from the image */
+    z-index: 0; /* Establish stacking context */
+  }
+
+  .banner-link-wrapper { /* Style for the anchor tag wrapper */
+    position: relative; /* Make the anchor tag the positioning context */
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    z-index: 0; /* Establish stacking context */
+  }
+
+  @media screen and (min-width: 750px) {
+    #Banner-{{ section.id }} {
+      height: {{ section.settings.banner_height }}px;
+      justify-content: {{ section.settings.desktop_content_position | split: '-' | last }};
+    }
+  }
+
+  /* Ensure image fills the container */
+   #Banner-{{ section.id }} .banner__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure image is behind content, but above wrapper/banner z-index 0 */
+  }
+
+  #Banner-{{ section.id }} .banner__media img {
+    display: block; /* Remove extra space below image */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the container without distorting aspect ratio */
+  }
+
+  /* Hide desktop image on mobile */
+  #Banner-{{ section.id }} .banner__media--desktop {
+    display: none;
+  }
+
+  /* Show mobile image on mobile */
+  #Banner-{{ section.id }} .banner__media--mobile {
+    display: block;
+  }
+
+  @media screen and (min-width: 750px) {
+    /* Show desktop image on desktop */
+    #Banner-{{ section.id }} .banner__media--desktop {
+      display: block;
+    }
+
+    /* Hide mobile image on desktop */
+    #Banner-{{ section.id }} .banner__media--mobile {
+      display: none;
+    }
+  }
+
+  /* Content container positioning */
+  #Banner-{{ section.id }} .banner__content {
+    position: relative;
+    z-index: 2; /* Ensure content is above image */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Text box styles - only show if text or button is visible */
+  {% if section.settings.show_text or section.settings.show_button %}
+    #Banner-{{ section.id }} .banner__box {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 4px;
+      text-align: {{ section.settings.text_alignment }};
+    }
+  {% else %}
+     #Banner-{{ section.id }} .banner__box {
+        display: none;
+     }
+  {% endif %}
+
+  /* Text styles */
+  #Banner-{{ section.id }} .banner__heading {
+    color: white !important;
+    font-weight: bold !important;
+    margin: 0;
+    {% unless section.settings.show_text %}
+      display: none;
+    {% endunless %}
+  }
+
+   #Banner-{{ section.id }} .banner__text {
+    color: white !important;
+    {% unless section.settings.show_text %}
+      display: none;
+    {% endunless %}
+   }
+
+  /* Button container alignment */
+  #Banner-{{ section.id }} .banner__buttons {
+    text-align: {{ section.settings.button_alignment }};
+    margin-top: 20px;
+    {% unless section.settings.show_button %}
+      display: none;
+    {% endunless %}
+  }
+
+  /* Button styles */
+  #Banner-{{ section.id }} .button {
+    {% if section.settings.button_style == 'primary' %}
+      background-color: #000;
+      color: #fff;
+    {% elsif section.settings.button_style == 'secondary' %}
+      background-color: #fff;
+      color: #000;
+    {% else %}
+      background-color: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+    {% endif %}
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  #Banner-{{ section.id }} .button:hover {
+    opacity: 0.8;
+  }
+{%- endstyle -%}
+
+{% comment %}
+{% if section.settings.banner_link != blank %}
+  <a href="{{ section.settings.banner_link }}" {% if section.settings.open_link_in_new_window %}target="_blank"{% endif %} class="banner-link-wrapper">
+{% endif %}
+{% endcomment %}
+
+<div
+  id="Banner-{{ section.id }}"
+  class="banner banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.image_height == 'adapt' and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}"
+  {% if section.settings.banner_link != blank %}
+    data-banner-link="{{ section.settings.banner_link }}"
+    data-open-in-new-window="{{ section.settings.open_link_in_new_window }}"
+    style="cursor: pointer;"
+  {% endif %}
+>
+  {%- if section.settings.image != blank -%}
+    <div class="banner__media banner__media--desktop">
+      {{
+        section.settings.image
+        | image_url: width: 3840
+        | image_tag:
+          width: section.settings.image.width,
+          height: section.settings.image.height,
+          class: 'banner__media-image',
+          loading: 'lazy'
+      }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.mobile_image != blank -%}
+    <div class="banner__media banner__media--mobile">
+      {{
+        section.settings.mobile_image
+        | image_url: width: 1500
+        | image_tag:
+          width: section.settings.mobile_image.width,
+          height: section.settings.mobile_image.height,
+          class: 'banner__media-image',
+          loading: 'lazy'
+      }}
+    </div>
+  {%- elsif section.settings.image != blank -%}
+    <div class="banner__media banner__media--mobile">
+      {{
+        section.settings.image
+        | image_url: width: 1500
+        | image_tag:
+          width: section.settings.image.width,
+          height: section.settings.image.height,
+          class: 'banner__media-image',
+          loading: 'lazy'
+      }}
+    </div>
+  {%- endif -%}
+
+  <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          <h2 class="banner__heading {{ block.settings.heading_size }}">
+            {{ block.settings.heading }}
+          </h2>
+        {%- when 'text' -%}
+          <div class="banner__text {{ block.settings.text_style }}">
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- when 'buttons' -%}
+          <div class="banner__buttons">
+            {%- if block.settings.button_label_1 != blank -%}
+              <a href="{{ block.settings.button_link_1 }}" class="button">
+                {{- block.settings.button_label_1 -}}
+              </a>
+            {%- endif -%}
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% comment %}
+{% if section.settings.banner_link != blank %}
+  </a>
+{% endif %}
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "t:sections.image-banner.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "Optional. If not set, desktop image will be used on mobile devices."
+    },
+    {
+      "type": "range",
+      "id": "banner_height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Banner height",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_banner_height",
+      "min": 150,
+      "max": 500,
+      "step": 50,
+      "unit": "px",
+      "label": "Mobile banner height",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {"value": "top-left", "label": "Top left"},
+        {"value": "top-center", "label": "Top center"},
+        {"value": "top-right", "label": "Top right"},
+        {"value": "middle-left", "label": "Middle left"},
+        {"value": "middle-center", "label": "Middle center"},
+        {"value": "middle-right", "label": "Middle right"},
+        {"value": "bottom-left", "label": "Bottom left"},
+        {"value": "bottom-center", "label": "Bottom center"},
+        {"value": "bottom-right", "label": "Bottom right"}
+      ],
+      "default": "middle-center",
+      "label": "Content position"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "center",
+      "label": "Text alignment"
+    },
+    {
+      "type": "select",
+      "id": "button_alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "center",
+      "label": "Button alignment"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text",
+      "label": "Show text content",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "banner_link",
+      "label": "Banner link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_link_in_new_window",
+      "label": "Open link in new window",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Image banner"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {"value": "h1", "label": "Large"},
+            {"value": "h2", "label": "Medium"},
+            {"value": "h3", "label": "Small"}
+          ],
+          "default": "h2",
+          "label": "Heading size"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Give customers details about the banner.</p>"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "label": "Button label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            {"value": "primary", "label": "Primary"},
+            {"value": "secondary", "label": "Secondary"},
+            {"value": "outline", "label": "Outline"}
+          ],
+          "default": "primary",
+          "label": "Button style"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.image-banner.presets.name",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('Banner-{{ section.id }}');
+    if (banner) {
+      const link = banner.dataset.bannerLink;
+      const openInNewWindow = banner.dataset.openInNewWindow === 'true';
+
+      if (link) {
+        banner.style.cursor = 'pointer'; // Ensure cursor is pointer
+        banner.addEventListener('click', function(event) {
+          // Prevent navigating if a clickable element inside the banner was clicked (like a button)
+          if (event.target.closest('a') || event.target.closest('button')) {
+            return;
+          }
+
+          if (openInNewWindow) {
+            window.open(link, '_blank');
+          } else {
+            window.location.href = link;
+          }
+        });
+      }
+    }
+  });
+</script>

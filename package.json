@@ -1,0 +1,15 @@
+{
+  "name": "toonieauction-price-scraper",
+  "version": "1.0.0",
+  "description": "批量抓取 Amazon、eBay、Walmart 价格信息",
+  "main": "price_scraper.js",
+  "type": "module",
+  "scripts": {
+    "start": "node price_scraper.js"
+  },
+  "dependencies": {
+    "playwright": "^1.42.0",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
+  }
+} 

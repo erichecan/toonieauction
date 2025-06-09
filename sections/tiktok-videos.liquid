@@ -1,0 +1,216 @@
+<div class="section-py">
+  <div class="container">
+    <div class="tiktok-section-header"> 
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">{{ section.settings.heading }}</h2>
+    </div>
+
+    {% comment %}
+      ****************************************************************************
+      IMPORTANT: For TikTok videos to display, you MUST include the TikTok embed
+      script in your theme's layout/theme.liquid file, usually before the closing
+      </body> tag. If it's already there, you don't need to add it again.
+
+      Example to add to theme.liquid:
+      <script async src="https://www.tiktok.com/embed.js"></script>
+      ****************************************************************************
+    {% endcomment %}
+
+    <div class="tiktok-video-grid">
+      {% comment %}
+        Iterate through blocks to display individual TikTok videos.
+        Each block contains a full embed code.
+      {% endcomment %}
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'tiktok_video' %}
+              {% if block.settings.embed_code != blank %}
+                <div class="tiktok-video-item" {{ block.shopify_attributes }}>
+                   <div class="tiktok-video-content">
+                      {% comment %} Output the full embed code block from the block setting {% endcomment %}
+                      {{ block.settings.embed_code }}
+                   </div>
+                   
+                </div>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+      {% else %}
+        <p class="text-center text-gray-500 col-span-full">Add TikTok embed codes in the theme editor to display them here.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "TikTok Videos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Latest TikTok Videos"
+    },
+    {
+      "type": "range",
+      "id": "grid_columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Number of columns",
+      "default": 3,
+      "info": "Select how many videos to display per row on large screens (1-4)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tiktok_video",
+      "name": "TikTok Video",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "embed_code",
+          "label": "TikTok Embed Code",
+          "info": "Paste the FULL embed code for this TikTok video here.\n\nGet embed code from TikTok: Share -> Embed -> Copy Code."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TikTok Videos",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% style %}
+.container {
+  max-width: 1200px; /* Typical desktop width */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+}
+
+.section-py {
+    padding-top: 2rem; /* py-8 equivalent */
+    padding-bottom: 2rem; /* py-8 equivalent */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.mb-10 {
+    margin-bottom: 2.5rem;
+}
+
+.text-gray-800 {
+    color: #1f2937;
+}
+
+/* New wrapper for the heading to ensure it's a separate block for centering */
+.tiktok-section-header {
+  width: 100%;
+  text-align: center; /* Ensures the h2 inside is centered */
+}
+
+
+/* Use plain CSS with Liquid for dynamic grid columns */
+{% assign grid_cols = section.settings.grid_columns | default: 3 %}
+.tiktok-video-grid {
+  display: grid;
+  gap: 1.5rem; /* gap-6 */
+  /* Initial settings for mobile */
+  grid-template-columns: repeat(1, 1fr); /* Single column for mobile */
+  max-width: 100%; /* Ensure it doesn't overflow mobile screen */
+  margin: 0 auto; /* Center the grid on mobile */
+  place-items: center; /* Center each video item horizontally and vertically in its cell */
+}
+
+@media (min-width: 768px) {
+  .tiktok-video-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    max-width: 650px; /* Example max-width for 2 columns on medium screens */
+    margin: 0 auto; /* Center the grid block on medium screens */
+    place-items: unset; /* Remove explicit item centering for multi-column layouts */
+  }
+}
+
+/* Dynamically set columns for large screens based on setting */
+@media (min-width: 1024px) {
+  .tiktok-video-grid {
+    grid-template-columns: repeat({{ grid_cols }}, 1fr);
+    max-width: 980px; /* Adjusted max-width for large screens based on default 3 columns */
+    margin: 0 auto; /* Center the grid block on large screens */
+    place-items: unset; /* Remove explicit item centering for multi-column layouts */
+  }
+}
+
+.tiktok-video-item {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Ensure it takes full width of its grid column */
+    min-height: 700px; /* Increased from 500px to 700px */
+    aspect-ratio: 9/16; /* Force the container to maintain TikTok's aspect ratio */
+}
+
+.tiktok-video-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tiktok-video-content iframe,
+.tiktok-video-content blockquote,
+.tiktok-video-content div[data-mode="embed"] {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important; /* Crucial: Ensure embeds do not exceed 100% width of their container */
+    min-height: 650px !important; /* Increased from 450px to 650px to match container */
+    object-fit: cover !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Ensure the actual TikTok embed content scales */
+.tiktok-video-content > * {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: inherit !important;
+    max-width: 100% !important; /* Apply max-width here too for robustness */
+}
+
+/* Fix for TikTok's embedded iframe sizing */
+.tiktok-embed {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: inherit !important;
+    max-width: 100% !important; /* Apply max-width here too for robustness */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+{% endstyle %}

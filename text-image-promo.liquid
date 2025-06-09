@@ -1,0 +1,267 @@
+{% schema %}
+{
+  "name": "Text with Image Promo",
+  "tag": "section",
+  "class": "section text-image-promo-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Headline"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Add a compelling subheading here.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "image_left", "label": "Image Left, Text Right" },
+        { "value": "image_right", "label": "Image Right, Text Left" }
+      ],
+      "default": "image_right"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text (e.g., 60% off)"
+    },
+    {
+      "type": "color",
+      "id": "badge_background_color",
+      "label": "Badge Background Color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Height",
+      "default": 400
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with Image Promo",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
+
+{% style %}
+  .text-image-promo-section {
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    height: {{ section.settings.section_height }}px;
+    display: flex;
+    align-items: center; /* Vertically center content */
+    overflow: hidden;
+    position: relative;
+    padding: 0; /* Remove padding from the section itself */
+  }
+
+  .text-image-promo-container {
+    display: flex;
+    flex-direction: {% if section.settings.layout == 'image_left' %}row{% else %}row-reverse{% endif %};
+    width: 100%;
+    height: 100%;
+    max-width: 1400px; /* Increase max-width to better match wide banner feel */
+    margin: 0 auto;
+  }
+
+  .text-image-promo-text-area {
+    flex: 0 0 40%; /* Give text area a fixed width percentage, adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center text content */
+    padding: 40px; /* Adjust padding */
+    z-index: 2;
+    text-align: left;
+  }
+
+  .text-image-promo-image-area {
+    flex: 0 0 60%; /* Give image area remaining width */
+    position: relative;
+    height: 100%;
+  }
+
+  .text-image-promo-image-area img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .text-image-promo-badge {
+    position: absolute;
+    top: 30px; /* Adjust position from top */
+    {% if section.settings.layout == 'image_left' %}
+      right: 30px; /* Adjust position from right if image is left */
+    {% else %}
+      left: 30px; /* Adjust position from left if image is right */
+    {% endif %}
+    background-color: {{ section.settings.badge_background_color }};
+    color: #ffffff;
+    border-radius: 50%;
+    width: 120px; /* Increase size */
+    height: 120px; /* Increase size */
+    display: flex;
+    flex-direction: column; /* Stack badge text vertically */
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1em; /* Adjust font size */
+    padding: 10px; /* Adjust padding */
+    text-align: center;
+    line-height: 1.2;
+    z-index: 3;
+  }
+
+  .text-image-promo-badge span {
+    display: block; /* Make badge text lines block elements */
+    font-size: 1.5em; /* Larger font for the main number */
+  }
+
+  .text-image-promo-text-area h2 {
+    margin-top: 0;
+    margin-bottom: 15px; /* Adjust space below heading */
+    font-size: 2.5em; /* Adjust heading size */
+    line-height: 1.1; /* Adjust line height */
+  }
+
+  .text-image-promo-text-area div {
+     margin-bottom: 25px; /* Adjust space below subheading */
+     font-size: 1.2em; /* Adjust subheading size */
+     line-height: 1.4; /* Adjust line height */
+  }
+
+  .text-image-promo-text-area .button {
+    display: inline-block;
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 12px 25px; /* Adjust button padding */
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .text-image-promo-text-area .button:hover {
+    background-color: #cc0000;
+  }
+
+  /* Mobile styles */
+  @media screen and (max-width: 749px) {
+    .text-image-promo-section {
+        height: auto;
+        padding: 20px 0; /* Adjust padding for mobile */
+    }
+
+    .text-image-promo-container {
+      flex-direction: column;
+      height: auto;
+      padding: 0 20px; /* Add horizontal padding to container on mobile */
+    }
+
+    .text-image-promo-text-area {
+       order: {% if section.settings.layout == 'image_left' %}2{% else %}1{% endif %};
+       flex: auto; /* Reset flex for mobile */
+       padding: 20px; /* Adjust padding for mobile */
+       text-align: center; /* Center text on mobile */
+    }
+
+     .text-image-promo-image-area {
+       order: {% if section.settings.layout == 'image_left' %}1{% else %}2{% endif %};
+       flex: auto; /* Reset flex for mobile */
+       height: 250px;
+     }
+
+     .text-image-promo-badge {
+        width: 100px; /* Adjust size for mobile */
+        height: 100px; /* Adjust size for mobile */
+        font-size: 1em;
+        padding: 8px; /* Adjust padding for mobile */
+        top: 10px; /* Adjust position for mobile */
+        {% if section.settings.layout == 'image_left' %}
+           right: 10px;
+        {% else %}
+           left: 10px;
+        {% endif %}
+     }
+
+      .text-image-promo-badge span {
+        font-size: 1.2em; /* Adjust font size for mobile */
+      }
+
+     .text-image-promo-text-area h2 {
+       font-size: 1.8em; /* Adjust heading size for mobile */
+     }
+
+     .text-image-promo-text-area div {
+        font-size: 1.1em; /* Adjust subheading size for mobile */
+     }
+  }
+{% endstyle %}
+
+<div class="text-image-promo-container page-width">
+  <div class="text-image-promo-text-area">
+    {% if section.settings.heading != blank %}
+      <h2>{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <div>{{ section.settings.subheading }}</div>
+    {% endif %}
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="button">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+  <div class="text-image-promo-image-area">
+    {% if section.settings.image != blank %}
+      <img src="{{ section.settings.image | image_url: width: 1500 }}" alt="{{ section.settings.image.alt }}">
+    {% endif %}
+    {% if section.settings.badge_text != blank %}
+      <div class="text-image-promo-badge">
+        {{ section.settings.badge_text | replace: '% off', '<br>% off' | replace: 'up to', '<span>up to</span><br>' | replace: ' ', '&nbsp;' }}
+      </div>
+    {% endif %}
+  </div>
+</div> 

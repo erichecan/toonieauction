@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Interaction Section</title>
+    <!-- Link to Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Link to FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <style>
+        /* Optional custom styles for rounded corners or specific adjustments */
+        .rounded-xl {
+            border-radius: 0.75rem; /* Tailwind's rounded-xl */
+        }
+         body {
+            background-color: #f7fafc; /* Match a light Tailwind background */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px; /* Typical desktop width */
+        }
+         .product-image {
+            width: 100%;
+            height: 240px; /* Fixed height for images */
+            object-fit: cover; /* Ensure images cover the area without distortion */
+         }
+          .interaction-icon {
+              background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+              backdrop-filter: blur(5px); /* Optional blur effect */
+          }
+    </style>
+</head>
+<body class="p-8">
+    <div class="container mx-auto rounded-xl overflow-hidden shadow-lg bg-white p-8">
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Product Spotlight</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product Card 1 -->
+            <div class="product-item bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                <div class="relative">
+                     <!-- Replace with a realistic product image from Unsplash/Pexels -->
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c3490?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Running Shoes" class="product-image">
+                    
+                    <!-- Like and Wishlist Counts -->
+                    <div class="absolute top-3 left-3 flex items-center interaction-icon text-white text-sm font-bold px-2 py-1 rounded-full">
+                         <i class="fas fa-thumbs-up mr-1 text-xs"></i> 150
+                    </div>
+                     <div class="absolute top-3 right-3 flex items-center interaction-icon text-white text-sm font-bold px-2 py-1 rounded-full">
+                         <i class="fas fa-heart mr-1 text-xs"></i> 80
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Stylish Running Shoes</h3>
+                     <p class="text-gray-600 text-base mb-4 flex-grow">Let us know if you like this product or want to add it to your wishlist!</p>
+                     
+                     <!-- Like and Wishlist Buttons -->
+                     <div class="flex justify-around mt-2">
+                         <button class="like-button flex items-center text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out focus:outline-none">
+                             <i class="fas fa-thumbs-up mr-2"></i> Like
+                         </button>
+                          <button class="wishlist-button flex items-center text-red-600 hover:text-red-800 transition duration-300 ease-in-out focus:outline-none">
+                            <i class="fas fa-heart mr-2"></i> Wishlist
+                         </button>
+                     </div>
+                </div>
+            </div>
+
+             <!-- Product Card 2 -->
+            <div class="product-item bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                <div class="relative">
+                     <!-- Replace with a realistic product image from Unsplash/Pexels -->
+                    <img src="https://images.unsplash.com/photo-1505740420928-959972490c0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Headphones" class="product-image">
+                    <div class="absolute top-3 left-3 flex items-center interaction-icon text-white text-sm font-bold px-2 py-1 rounded-full">
+                         <i class="fas fa-thumbs-up mr-1 text-xs"></i> 120
+                    </div>
+                     <div class="absolute top-3 right-3 flex items-center interaction-icon text-white text-sm font-bold px-2 py-1 rounded-full">
+                         <i class="fas fa-heart mr-1 text-xs"></i> 55
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Noise Cancelling Headphones</h3>
+                    <p class="text-gray-600 text-base mb-4 flex-grow">Help us bring these high-quality headphones to our store!</p>
+                     <div class="flex justify-around mt-2">
+                         <button class="like-button flex items-center text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out focus:outline-none">
+                             <i class="fas fa-thumbs-up mr-2"></i> Like
+                         </button>
+                          <button class="wishlist-button flex items-center text-red-600 hover:text-red-800 transition duration-300 ease-in-out focus:outline-none">
+                            <i class="fas fa-heart mr-2"></i> Wishlist
+                         </button>
+                     </div>
+                </div>
+            </div>
+
+             <!-- Product Card 3 -->
+            <div class="product-item bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                <div class="relative">
+                     <!-- Replace with a realistic product image from Unsplash/Pexels -->
+                    <img src="https://images.unsplash.com/photo-1526178009548-fc747069398a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Camera" class="product-image">
+                     <div class="absolute top-3 left-3 flex items-center interaction-icon text-white text-sm font-bold px-2 py-1 rounded-full">
+                         <i class="fas fa-thumbs-up mr-1 text-xs"></i> 95
+                    </div>
+                     <div class="absolute top-3 right-3 flex items-center interaction-icon text-white text-sm font-bold px-2 py-1 rounded-full">
+                         <i class="fas fa-heart mr-1 text-xs"></i> 40
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Professional Camera Kit</h3>
+                     <p class="text-gray-600 text-base mb-4 flex-grow">Vote if you'd like to see this camera kit available!</p>
+                     <div class="flex justify-around mt-2">
+                         <button class="like-button flex items-center text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out focus:outline-none">
+                             <i class="fas fa-thumbs-up mr-2"></i> Like
+                         </button>
+                          <button class="wishlist-button flex items-center text-red-600 hover:text-red-800 transition duration-300 ease-in-out focus:outline-none">
+                            <i class="fas fa-heart mr-2"></i> Wishlist
+                         </button>
+                     </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+     <script>
+        // Placeholder for interaction logic
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Like recorded! (This is a prototype)');
+                // TODO: Implement actual like logic
+            });
+        });
+         document.querySelectorAll('.wishlist-button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Added to wishlist! (This is a prototype)');
+                // TODO: Implement actual wishlist logic
+            });
+        });
+    </script>
+</body>
+</html> 

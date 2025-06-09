@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Toonie Auction App Styles
+   ========================================================================== */
+
+/* Auction Container
+   ========================================================================== */
+.auction.auction-container {
+  /* Base container styles */
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.auction.auction-container:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Auction Price Section
+   ========================================================================== */
+.auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: baseline !important; /* Align items to the baseline for better vertical alignment */
+  gap: 0.5rem !important;
+}
+
+.auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 > span.text-sm.uppercase.text-gray-500 {
+  font-size: 0.6rem !important; /* Further shrink 'Current Bid' / 'Starting Price' label */
+}
+
+.auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 > strong > span.text-lg {
+  font-size: 0.8rem !important; /* Further shrink price value like 'CA$2.00' */
+  white-space: nowrap; /* Keep price on one line */
+}
+
+.auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 > strong > span.px-1.text-right.text-sm.font-medium.text-gray-500 {
+  font-size: 0.6rem !important; /* Further shrink bid count like '1 bid' */
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+
+/* Auction Countdown Timer
+   ========================================================================== */
+.auction.auction-container .auction-countdown.grid {
+  max-width: none !important; /* Allow countdown to take full width if needed */
+  justify-content: center !important;
+  gap: 0.75rem !important; /* Adjust overall gap for compactness */
+}
+
+.auction.auction-container .auction-countdown.grid > div.flex.flex-col {
+  display: flex !important;
+  flex-direction: column !important; /* Revert to stacked: Make number and unit appear in different lines */
+  align-items: center !important; /* Center items for stacked layout */
+  /* gap: 0.25rem !important; Removed: this gap was for inline elements */
+}
+
+.auction.auction-container .auction-countdown.grid > div.flex.flex-col > span.text-xl {
+  font-size: 0.85rem !important; /* Even further shrink countdown number (1, 11, 39) */
+}
+
+.auction.auction-container .auction-countdown.grid > div.flex.flex-col > span.my-1.text-xs.text-gray-500 {
+  font-size: 0.45rem !important; /* Even further shrink countdown unit (days, hours, minutes) */
+  margin-top: 0.25rem !important; /* Add back margin for stacking */
+  margin-bottom: 0 !important;
+}
+
+.auction.auction-container .auction-countdown.grid > div.flex.flex-col > span.font-serif.text-xl {
+  font-size: 0.85rem !important; /* Even further shrink ':' separator */
+  line-height: 1 !important;
+}
+
+/* Auction States
+   ========================================================================== */
+.auction.auction-container.ending-soon .auction-countdown.grid {
+  color: #dc2626 !important; /* Red warning color */
+}
+
+.auction.auction-container.new-auction .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 > strong > span.text-lg {
+  color: #059669 !important; /* Green for new auctions */
+}
+
+/* Auction Animations
+   ========================================================================== */
+@keyframes toonie-auction-countdown-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.auction.auction-container .auction-countdown.grid .seconds.text-xl {
+  animation: toonie-auction-countdown-pulse 1s infinite;
+}
+
+/* Responsive Styles
+   ========================================================================== */
+@media screen and (max-width: 640px) {
+  .auction.auction-container .auction-countdown.grid {
+    max-width: 100% !important;
+    gap: 0.5rem !important;
+  }
+
+  .auction.auction-container .auction-countdown.grid > div.flex.flex-col {
+    flex-direction: column !important; /* Revert to stacked for mobile as well */
+    align-items: center !important;
+  }
+
+  .auction.auction-container .auction-countdown.grid > div.flex.flex-col > span.text-xl {
+    font-size: 0.65rem !important; /* Even further shrink mobile countdown number */
+  }
+
+  .auction.auction-container .auction-countdown.grid > div.flex.flex-col > span.my-1.text-xs.text-gray-500 {
+    font-size: 0.35rem !important; /* Even further shrink mobile countdown unit */
+    margin-top: 0.25rem !important;
+  }
+
+  /* Adjust price section for mobile to ensure single line */
+  .auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 {
+    flex-direction: row !important; /* Force to one row for mobile */
+    flex-wrap: nowrap !important; /* Prevent wrapping */
+    align-items: baseline !important;
+    gap: 0.25rem !important; /* Adjust gap for mobile */
+  }
+
+  .auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 > span.text-sm.uppercase.text-gray-500 {
+    font-size: 0.55rem !important; /* Even further shrink mobile 'Current Bid' / 'Starting Price' label */
+  }
+
+  .auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 > strong > span.text-lg {
+    font-size: 0.75rem !important; /* Even further shrink mobile price value */
+  }
+
+  .auction.auction-container .my-2.flex.justify-between > div.flex.flex-col.text-sm.gap-1 > strong > span.px-1.text-right.text-sm.font-medium.text-gray-500 {
+    font-size: 0.55rem !important; /* Even further shrink mobile bid count */
+  }
+}
+
+/* Theme Integration Variables
+   ========================================================================== */
+.auction.auction-container {
+  /* These variables can be overridden by theme settings */
+  --toonie-auction-primary-color: #111827;
+  --toonie-auction-secondary-color: #6b7280;
+  --toonie-auction-background-color: #ffffff;
+  --toonie-auction-border-color: #e5e7eb;
+  --toonie-auction-warning-color: #dc2626;
+  --toonie-auction-success-color: #059669;
+}
+
+/* Utility Classes
+   ========================================================================== */
+.toonie-auction-hidden {
+  display: none !important;
+}
+
+.toonie-auction-visible {
+  display: block !important;
+}
+
+/* Accessibility
+   ========================================================================== */
+.auction.auction-container:focus-within {
+  outline: 2px solid var(--toonie-auction-primary-color);
+  outline-offset: 2px;
+}
+
+/* Print Styles
+   ========================================================================== */
+@media print {
+  .auction.auction-container {
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+
+  .auction.auction-container .auction-countdown.grid {
+    color: #000 !important;
+  }
+}
+
+/* Mobile Header and Logo Styles (Moved from sections/header.liquid)
+   ========================================================================== */
+@media screen and (max-width: 798px) {
+  #header {
+    position: relative !important;
+    z-index: 100 !important;
+    background: #ff0000 !important;
+  }
+
+  #header .top-bar {
+    height: 100px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+  }
+
+  /* 移动菜单按钮容器 */
+  #header details[data-mobile-menu] {
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* 右侧图标容器 */
+  #header .top-bar--right {
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  /* 调整图标大小 */
+  #header .top-bar--right .icon-search,
+  #header .top-bar--right .icon-cart,
+  #header .top-bar--right .icon-bag {
+    font-size: 24px !important;
+    color: #ffffff !important;
+  }
+
+  /* 调整菜单文本颜色 */
+  #header .mobile_nav.dropdown_link .mobile-menu-title {
+    color: #ffffff !important;
+  }
+
+  /* 调整 logo 样式 */
+  #header .mobile_logo.logo {
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  #header .mobile_logo.logo img,
+  #header .mobile_logo.logo img.lazyloaded {
+    width: 120px !important;
+    height: 90px !important;
+    max-height: 90px !important;
+    object-fit: fill !important;
+    object-position: initial !important;
+  }
+
+  /* Mobile Menu Styles */
+  #header .mobile-menu-container.dropdown {
+    position: fixed !important; /* Forced fixed positioning */
+    top: 100px !important; /* Starts below header */
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important; /* Fills remaining viewport height */
+    width: 100% !important;
+    background: #0000FF !important; /* Debug: Menu background blue */
+    z-index: 101 !important; /* Ensures menu is above header */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menu shadow */
+    height: calc(100vh - 100px) !important; /* Menu height fills remaining viewport */
+    overflow-y: auto !important; /* Menu content scrollable */
+    visibility: hidden; /* Start hidden */
+    opacity: 0; /* Start fully transparent */
+    transition: visibility 0.3s, opacity 0.3s ease-in-out; /* Smooth transition */
+  }
+
+  /* When the details element is open, make the menu visible */
+  #header details[data-mobile-menu][open] > .mobile-menu-container.dropdown {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  #header .mobile-menu-container.dropdown .menu {
+    padding: 1rem !important;
+    margin: 0 !important;
+    list-style: none !important;
+    background-color: #f0f0f0 !important; /* Debug: Menu ul background grey */
+    /* min-height: 200px !important; Removed: not strictly necessary for display */
+  }
+
+  #header .mobile-menu-container.dropdown .menu li {
+    padding: 0.5rem 0 !important;
+    border-bottom: 1px solid #e5e7eb !important;
+  }
+
+  #header .mobile-menu-container.dropdown .menu li:last-child {
+    border-bottom: none !important;
+  }
+
+  #header .mobile-menu-container.dropdown .menu a {
+    color: #FFFF00 !important; /* Debug: Menu text yellow */
+    text-decoration: none !important;
+    display: block !important;
+    padding: 0.5rem 0 !important;
+  }
+
+  #header .mobile-menu-container.dropdown .menu a:hover {
+    color: #4b5563 !important; /* Darker hover color */
+  }
+
+  /* When menu is open, prevent body scrolling */
+  body.is-active {
+    overflow: hidden !important;
+  }
+} 

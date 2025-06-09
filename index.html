@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Homepage Prototype</title>
+    <!-- Link to Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px; /* Add some padding around the iframes */
+            background-color: #e2e8f0; /* A light gray background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section-iframe {
+            width: 100%;
+            max-width: 1280px; /* Set a max-width similar to a typical website container */
+            height: 800px; /* Approximate height for each section - adjust as needed */
+            border: 1px solid #cbd5e0; /* Subtle border */
+            border-radius: 0.75rem; /* Match the rounded corners */
+            margin-bottom: 20px; /* Space between sections */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            overflow: hidden; /* Hide potential scrollbars within the iframe */
+        }
+        /* Adjust iframe content iframes */
+        .section-iframe iframe {
+             width: 100%;
+             height: 100%;
+             border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe src="tiktok.html" class="section-iframe" title="TikTok Videos Section"></iframe>
+    <iframe src="event.html" class="section-iframe" title="Event Announcement Section"></iframe>
+    <iframe src="voting.html" class="section-iframe" title="Product Voting Section"></iframe>
+
+</body>
+</html> 

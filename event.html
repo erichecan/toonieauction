@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Announcement Section</title>
+    <!-- Link to Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Link to FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <style>
+        /* Optional custom styles for rounded corners or specific adjustments */
+        .rounded-xl {
+            border-radius: 0.75rem; /* Tailwind's rounded-xl */
+        }
+        body {
+            background-color: #f7fafc; /* Match a light Tailwind background */
+            margin: 0;
+            padding: 0;
+        }
+         .container {
+            max-width: 1200px; /* Typical desktop width */
+        }
+         .event-card-image {
+            width: 150px; /* Fixed width for the image placeholder */
+            height: 150px; /* Fixed height */
+            object-fit: cover;
+            flex-shrink: 0; /* Prevent image from shrinking */
+         }
+    </style>
+</head>
+<body class="p-8">
+    <div class="container mx-auto rounded-xl overflow-hidden shadow-lg bg-white p-8">
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Upcoming Event</h2>
+        
+        <!-- Event Card (參考截图样式) -->
+        <div class="flex items-center bg-gray-50 rounded-lg shadow-md p-6 mb-6">
+            <!-- Image Placeholder (参考截图左侧的图片区域) -->
+            <div class="event-card-image bg-blue-300 rounded-lg flex items-center justify-center text-blue-800 text-sm italic mr-6">
+                <!-- Replace with an actual event image -->
+                Event Image Placeholder
+            </div>
+
+            <div class="flex-grow">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Thursday June 20th 2024 - Special Online Event</h3>
+                <p class="text-gray-600 text-base mb-4">Join us for a special online event with exclusive offers and new arrivals!</p>
+                
+                <div class="flex items-center text-gray-700 mb-4">
+                    <i class="far fa-clock mr-2"></i> 
+                    Starts In: <span class="font-semibold ml-1">5 Days 10:30:55</span>
+                </div>
+
+                <a href="#" class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out text-lg font-semibold">
+                    View Event Details
+                </a>
+            </div>
+        </div>
+        
+        <!-- You could add more event cards here if needed -->
+
+    </div>
+</body>
+</html> 

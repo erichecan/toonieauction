@@ -1,0 +1,120 @@
+/* Auction Container Styles */
+.auction-container {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+/* Price Section Styles */
+.auction-container .text-gray-500 {
+  color: #6b7280; /* 可以自定义颜色 */
+}
+
+.auction-container .text-lg {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827; /* 可以自定义颜色 */
+}
+
+/* Countdown Timer Styles */
+.auction-countdown {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  max-width: 20rem;
+  margin: 0.5rem 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.auction-countdown .flex.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auction-countdown .text-xl {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827; /* 可以自定义颜色 */
+}
+
+.auction-countdown .text-xs {
+  font-size: 0.75rem;
+  color: #6b7280; /* 可以自定义颜色 */
+}
+
+.auction-countdown .font-serif {
+  font-family: serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #111827;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 640px) {
+  .auction-countdown {
+    max-width: 100%;
+    gap: 0.25rem;
+  }
+
+  .auction-countdown .text-xl {
+    font-size: 1.25rem;
+  }
+
+  .auction-countdown .text-xs {
+    font-size: 0.7rem;
+  }
+}
+
+/* Custom Theme Colors - 可以根据您的主题颜色调整 */
+.auction-container {
+  --auction-primary-color: #111827;
+  --auction-secondary-color: #6b7280;
+  --auction-background-color: #ffffff;
+  --auction-border-color: #e5e7eb;
+}
+
+/* Hover Effects */
+.auction-container:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Custom Animation for Countdown */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.auction-countdown .seconds {
+  animation: pulse 1s infinite;
+}
+
+/* Custom Styles for Different States */
+.auction-container.ending-soon .auction-countdown {
+  color: #dc2626; /* 红色警告色 */
+}
+
+.auction-container.new-auction .text-lg {
+  color: #059669; /* 绿色新拍卖色 */
+}
+
+/* Custom Button Styles (如果需要) */
+.auction-container .bid-button {
+  background-color: var(--auction-primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.auction-container .bid-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+} 
