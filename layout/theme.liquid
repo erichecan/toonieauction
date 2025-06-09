@@ -158,6 +158,14 @@
 
     {% if collection.previous_product %}<link rel="prev" href="{{ collection.previous_product }}">{% endif %}
     {% if collection.next_product %}<link rel="next" href="{{ collection.next_product }}">{% endif %}
+
+    <style>
+      .page-width {
+        max-width: 1200px; /* Adjust this value if a different max-width is desired */
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
   </head>
 
   {% if template contains "index" %}
@@ -247,7 +255,7 @@
       {% sections 'header-group' %}
     </div>
 
-    <div style="--background-color: {{ settings.shop_bg_color }}">
+    <div class="page-width" style="--background-color: {{ settings.shop_bg_color }}">
       {% if settings.enable_age_gate %}
         {%
           render 'age-gate',
