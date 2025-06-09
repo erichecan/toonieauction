@@ -1,0 +1,73 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+    "sections": {
+      "main": {
+        "type": "collection-template",
+        "blocks": {
+          "fce49dcd-a68c-4ea6-b3ee-d6e40793b57d": {
+            "type": "filter",
+            "settings": {
+              "filter_name": "Price",
+              "filter_tags": "Under $25, $25 - $50, $50 - $75, $75 - $100, $100+",
+              "enable_filter_swatches": false
+            }
+          },
+          "d64073d1-dc35-4cd7-a39b-e9dabfd04833": {
+            "type": "filter",
+            "settings": {
+              "filter_name": "Material Color",
+              "filter_tags": "Black, Black-Green, Black-red, Blue-pink, CadetBlue, Chai, Cork, Dahlia, DeepSkyBlue, Denim-stripe, Denim, Dyad-red, Grey, Green, LimeGreen, Lime-purple, Mandala, MediumOrchid, Natural, Navy, Oatmeal-stripe, Ocean, Ochre, Pacific-print, DeepPink, Purple, Rose, Sage, Sangria-print, Sangria, Silver, Sky-blue, Strap-black, Strap-lime, Teal,  Turquoise, Violet, Warm-lattice, Pink/Purple",
+              "enable_filter_swatches": true
+            }
+          },
+          "7b0beae5-c021-4c3c-ba48-1455b9f7dd68": {
+            "type": "filter",
+            "settings": {
+              "filter_name": "Style",
+              "filter_tags": "Bag, Bra top, Block, Capri, Dress, Gloves, Headband, Hoodie, Jacket, Leggings, Legwarmers, Long sleeve, Mat, Mat wash, Pants, Shorts, Skirt, Socks, Strap, Sweatshirt, Tank top, Tee, Tote, Towel, Tunic",
+              "enable_filter_swatches": false
+            }
+          },
+          "9e9d0dab-0aec-4892-8694-a682e3839868": {
+            "type": "recently_viewed",
+            "settings": {
+              "sidebar_rv_title": "Recently Viewed",
+              "sidebar_rv_per": 2
+            }
+          }
+        },
+        "block_order": [
+          "fce49dcd-a68c-4ea6-b3ee-d6e40793b57d",
+          "d64073d1-dc35-4cd7-a39b-e9dabfd04833",
+          "7b0beae5-c021-4c3c-ba48-1455b9f7dd68",
+          "9e9d0dab-0aec-4892-8694-a682e3839868"
+        ],
+        "settings": {
+          "featured_collection_image": false,
+          "wide_display": true,
+          "caption_content_background": "original",
+          "display_collection_title": true,
+          "collection_breadcrumb": true,
+          "collection_tags": false,
+          "collection_sort": false,
+          "products_per_row": 3,
+          "pagination_limit": 20,
+          "toggle": false,
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      }
+    },
+    "order": [
+      "main"
+    ]
+  }
+  
