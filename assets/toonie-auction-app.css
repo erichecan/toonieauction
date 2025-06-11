@@ -248,14 +248,6 @@
     right: 0 !important;
     bottom: 0 !important; /* Fills remaining viewport height */
     width: 100% !important;
-    background: #0000FF !important; /* Debug: Menu background blue */
-    z-index: 101 !important; /* Ensures menu is above header */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menu shadow */
-    height: calc(100vh - 100px) !important; /* Menu height fills remaining viewport */
-    overflow-y: auto !important; /* Menu content scrollable */
-    visibility: hidden; /* Start hidden */
-    opacity: 0; /* Start fully transparent */
-    transition: visibility 0.3s, opacity 0.3s ease-in-out; /* Smooth transition */
   }
 
   /* When the details element is open, make the menu visible */
@@ -296,4 +288,21 @@
   body.is-active {
     overflow: hidden !important;
   }
+}
+
+/* Ensure the hidden class works */
+.hidden {
+  display: none !important;
+}
+
+/* Desktop hover effect */
+.thumbnail-hover-enabled--true .product-info__caption {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.thumbnail-hover-enabled--true:hover .product-info__caption {
+  opacity: 1;
+  visibility: visible;
 } 

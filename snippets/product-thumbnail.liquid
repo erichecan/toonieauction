@@ -12,6 +12,53 @@
     --progress-bar-height: 2px;
     --progress-bar-color: $product-media-fill-color;
   }
+
+  /* Product thumbnail styles */
+  .product-wrap .image__container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* 创建 1:1 的宽高比 */
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .product-wrap .image__container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  /* 确保商品卡片布局一致 */
+  .thumbnail {
+    margin-bottom: 2rem;
+  }
+
+  .product-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* 调整商品标题样式 */
+  .product-info__caption .title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #374151;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  /* 调整商品价格样式 */
+  .product-info__caption .price {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
 {% endstyle %}
 
 <div
@@ -38,77 +85,77 @@
     data-load-more--grid-item
   {% endif %}
 >
-<div class="product-{{ product.id }}">
-  <div class="product-wrap {% if settings.collection_secondary_image != blank and secondaryImage != blank %}has-secondary-media-swap{% endif %}">
-    <div class="relative product_image">
-      <a href="{{ product.url | within: collection }}">
-        <div class="image__container">
-          {% if settings.product_form_style == 'select' %}
-            {%
-              render 'quick-shop-gallery',
-              product: product,
-            %}
-          {% else %}
-            {% if settings.quick_shop_enabled and settings.quick_shop_style == 'inline' and product.selected_or_first_available_variant.image %}
+  <div class="product-{{ product.id }}">
+    <div class="product-wrap {% if settings.collection_secondary_image != blank and secondaryImage != blank %}has-secondary-media-swap{% endif %}">
+      <div class="relative product_image">
+        <a href="{{ product.url | within: collection }}">
+          <div class="image__container">
+            {% if settings.product_form_style == 'select' %}
               {%
-                render 'image-element',
-                image: product.selected_or_first_available_variant.image,
-                alt: alt_text,
-                lazyload: lazyload,
-                object_fit: align_height,
-                max_height: collection_height,
+                render 'quick-shop-gallery',
+                product: product,
               %}
+            {% else %}
+              {% if settings.quick_shop_enabled and settings.quick_shop_style == 'inline' and product.selected_or_first_available_variant.image %}
+                {%
+                  render 'image-element',
+                  image: product.selected_or_first_available_variant.image,
+                  alt: alt_text,
+                  lazyload: lazyload,
+                  object_fit: align_height,
+                  max_height: collection_height,
+                %}
+              {% else %}
+                {%
+                  render 'image-element',
+                  image: product.featured_media.preview_image,
+                  alt: alt_text,
+                  lazyload: lazyload,
+                  object_fit: align_height,
+                  max_height: collection_height,
+                %}
+              {% endif %}
+            {% endif %}
+          </div>
+
+          {% if settings.collection_secondary_image != blank and product.media[1] != blank %}
+            {% if product.media[1].media_type == 'external_video' %}
+              <div
+                class="
+                  external-video__container
+                  {% if section.index0 < 2 %}lazyload{% else %}lazypreload{% endif %}
+                  secondary-media-hidden
+                  video-on-hover
+                "
+              >
+                <div class="youtube-wrapper" data-youtube-video>
+                  {{ product.media[1] | external_video_tag }}
+                </div>
+              </div>
+            {% elsif product.media[1].media_type == 'video' %}
+              <div class="video__container lazyload lazypreload secondary-media-hidden video-on-hover" data-html5-video>
+                {{ product.media[1] | video_tag: controls: false }}
+              </div>
             {% else %}
               {%
                 render 'image-element',
-                image: product.featured_media.preview_image,
+                image: product.media[1].preview_image,
                 alt: alt_text,
-                lazyload: lazyload,
-                object_fit: align_height,
-                max_height: collection_height,
+                additional_classes: 'secondary lazypreload secondary-media-hidden',
               %}
             {% endif %}
           {% endif %}
-        </div>
+        </a>
+      </div>
 
-        {% if settings.collection_secondary_image != blank and product.media[1] != blank %}
-          {% if product.media[1].media_type == 'external_video' %}
-            <div
-              class="
-                external-video__container
-                {% if section.index0 < 2 %}lazyload{% else %}lazypreload{% endif %}
-                secondary-media-hidden
-                video-on-hover
-              "
-            >
-              <div class="youtube-wrapper" data-youtube-video>
-                {{ product.media[1] | external_video_tag }}
-              </div>
-            </div>
-          {% elsif product.media[1].media_type == 'video' %}
-            <div class="video__container lazyload lazypreload secondary-media-hidden video-on-hover" data-html5-video>
-              {{ product.media[1] | video_tag: controls: false }}
-            </div>
-          {% else %}
-            {%
-              render 'image-element',
-              image: product.media[1].preview_image,
-              alt: alt_text,
-              additional_classes: 'secondary lazypreload secondary-media-hidden',
-            %}
-          {% endif %}
-        {% endif %}
-      </a>
+      {%
+        render 'product-details',
+        product: product,
+        collection: collection,
+        collection_handles: collection_handles,
+      %}
     </div>
-
-    {%
-      render 'product-details',
-      product: product,
-      collection: collection,
-      collection_handles: collection_handles,
-    %}
   </div>
-</div>
 
   <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}">
     {%
