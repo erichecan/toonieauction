@@ -86,9 +86,9 @@
     </div>
   {% endif %}
 
-  <div class="top-bar">
+  <div class="top-bar" style="display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 15px; background: #ff0000;">
     <details data-mobile-menu>
-      <summary class="mobile_nav dropdown_link" data-mobile-menu-trigger>
+      <summary class="mobile_nav dropdown_link" data-mobile-menu-trigger style="display: flex; align-items: center;">
         <div data-mobile-menu-icon>
           <span></span>
           <span></span>
@@ -96,22 +96,25 @@
           <span></span>
         </div>
 
-        <span class="mobile-menu-title">{{ 'layout.general.menu' | t }}</span>
+        <span class="mobile-menu-title" style="color: #ffffff; margin-left: 8px;">{{ 'layout.general.menu' | t }}</span>
       </summary>
       <div class="mobile-menu-container dropdown" data-nav>
         <ul class="menu" id="mobile_menu">
           {%
             render 'mobile-menu',
             menu: section.settings.main_linklist,
+            link_class: 'mobile-menu-link',
           %}
           {%
             render 'mobile-menu',
             menu: section.settings.main_linklist2,
+            link_class: 'mobile-menu-link',
           %}
           {%
             render 'mobile-menu',
             menu: section.settings.top_bar_menu,
             context: 'top_bar_menu',
+            link_class: 'mobile-menu-link',
           %}
 
           {% if section.settings.phone_number != blank %}
@@ -149,40 +152,43 @@
       </div>
     </details>
 
-    <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="mobile_logo logo">
+    <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="mobile_logo logo" style="width: 120px; height: 50px; display: flex; align-items: center; justify-content: center;">
       {% if section.settings.logo_mobile != blank %}
         <img
           src="{{ section.settings.logo_mobile | img_url: '410x' }}"
           alt="{{ shop.name | escape }}"
           class="lazyload"
+          style="width: 100%; height: 100%; object-fit: contain;"
         >
       {% elsif section.settings.logo != blank %}
         <img
           src="{{ section.settings.logo | img_url: '410x' }}"
           alt="{{ shop.name | escape }}"
+          style="width: 100%; height: 100%; object-fit: contain;"
         >
       {% else %}
         {{ shop.name }}
       {% endif %}
     </a>
 
-    <div class="top-bar--right">
+    <div class="top-bar--right" style="display: flex; align-items: center; gap: 15px; margin-left: 10px;">
       <a
         href="https://toonieauction.com/apps/auction-plus/watchlists"
         class="top-bar__login-link"
         title="watchlists"
+        style="display: flex; align-items: center;"
       >
-        <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 20 20" style="width: 1em; height: 1em; margin-right: .2em; text-align: center; font-size: 1.4em; vertical-align: middle;">
+        <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 20 20" style="width: 24px; height: 24px; color: #ffffff;">
           <path d="M10 3.25C8.03 1.28 5.06 1.28 3.09 3.25C1.12 5.22 1.12 8.35 3.09 10.32L10 17.23L16.91 10.32C18.88 8.35 18.88 5.22 16.91 3.25C14.94 1.28 11.97 1.28 10 3.25Z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
       {% if section.settings.search_enabled %}
-        <a href="{{ routes.search_url }}" class="icon-search dropdown_link" title="{{ 'general.search.title' | t | escape }}" data-dropdown-rel="search"></a>
+        <a href="{{ routes.search_url }}" class="icon-search dropdown_link" title="{{ 'general.search.title' | t | escape }}" data-dropdown-rel="search" style="width: 24px; height: 24px; color: #ffffff;"></a>
       {% endif %}
 
       {% if section.settings.show_cart %}
-        <div class="cart-container">
-          <a href="{{ routes.cart_url }}" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{{ cart.item_count }}</span></a>
+        <div class="cart-container" style="position: relative; z-index: 2;">
+          <a href="{{ routes.cart_url }}" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant style="width: 24px; height: 24px; color: #ffffff;"> <span class="cart_count" style="color: #ffffff; font-size: 12px;">{{ cart.item_count }}</span></a>
         </div>
       {% endif %}
     </div>
@@ -278,18 +284,6 @@
             </li>
           {% endif %}
 
-          <li>
-            <a
-              href="https://toonieauction.com/apps/auction-plus/watchlists"
-              class="top-bar__login-link"
-              title="watchlists"
-            >
-              <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 20 20" style="width: 1em; height: 1em; margin-right: .2em; text-align: center; font-size: 1.4em; vertical-align: middle;">
-                <path d="M10 3.25C8.03 1.28 5.06 1.28 3.09 3.25C1.12 5.22 1.12 8.35 3.09 10.32L10 17.23L16.91 10.32C18.88 8.35 18.88 5.22 16.91 3.25C14.94 1.28 11.97 1.28 10 3.25Z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </li>
-
           {% if shop.customer_accounts_enabled %}
             <li>
               <a
@@ -304,6 +298,18 @@
               </a>
             </li>
           {% endif %}
+
+          <li>
+            <a
+              href="https://toonieauction.com/apps/auction-plus/watchlists"
+              class="top-bar__login-link"
+              title="watchlists"
+            >
+              <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 20 20" style="width: 1em; height: 1em; margin-right: .2em; text-align: center; font-size: 1.4em; vertical-align: middle;">
+                <path d="M10 3.25C8.03 1.28 5.06 1.28 3.09 3.25C1.12 5.22 1.12 8.35 3.09 10.32L10 17.23L16.91 10.32C18.88 8.35 18.88 5.22 16.91 3.25C14.94 1.28 11.97 1.28 10 3.25Z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
         </ul>
 
         {% if section.settings.show_cart %}
@@ -763,6 +769,7 @@
 </script>
 
 <style>
+  /* 基础样式 */
   div.header__logo,
   div.header__logo img,
   div.header__logo span,
@@ -770,152 +777,93 @@
     max-width: {{ section.settings.logo_display_width | append: 'px' }};
   }
 
-  /* Mobile header styles */
+  /* 移动端样式 */
   @media screen and (max-width: 798px) {
+    /* Header 基础样式 */
     #header {
-      position: relative !important;
-      z-index: 100 !important;
-      background: #ff0000 !important;
+      background: #ff0000;
     }
 
+    /* Top bar 容器 */
     #header .top-bar {
-      height: 100px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      padding: 0 20px !important;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      padding: 0 15px;
     }
 
-    /* 移动菜单按钮容器 */
-    #header details[data-mobile-menu] {
-      height: 100% !important;
-      display: flex !important;
-      align-items: center !important;
+    /* Logo 样式 */
+    #header .mobile_logo.logo {
+      width: 80px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* 右侧图标容器 */
+    #header .mobile_logo.logo img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* 右侧图标区域 */
     #header .top-bar--right {
-      height: 100% !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 3px !important; /* Further reduced gap for closer icons */
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
-    /* 调整图标大小 */
+    /* 图标样式 */
     #header .top-bar--right .icon-search,
     #header .top-bar--right .icon-cart,
-    #header .top-bar--right .icon-bag {
-      font-size: 24px !important;
-      color: #ffffff !important;
-    }
-
-    /* 调整菜单文本颜色 */
-    #header .mobile_nav.dropdown_link .mobile-menu-title {
-      color: #ffffff !important;
-    }
-
-    /* 调整 logo 样式 */
-    #header .mobile_logo.logo {
-      height: 100% !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-    
-    #header .mobile_logo.logo img,
-    #header .mobile_logo.logo img.lazyloaded {
-      width: 120px !important;
-      height: 90px !important; /* 直接设置高度 */
-      /* 移除 object-fit 和 object-position */
-    }
-
-    /* Mobile Menu Container */
-    #header .mobile-menu-container.dropdown {
-      position: fixed !important;
-      top: 100px !important;
-      left: 0 !important;
-      right: 0 !important;
-      bottom: 0 !important;
-      width: 100% !important;
-      height: calc(100vh - 100px) !important;
-      background-color: #ffffff !important;
-      z-index: -1 !important; /* 默认在header后面 */
-      overflow-y: auto !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      transition: all 0.3s ease-in-out !important;
-      transform: translateY(-10px) !important;
-    }
-
-    /* Show menu when details is open */
-    #header details[data-mobile-menu][open] > .mobile-menu-container.dropdown {
-      visibility: visible !important;
-      opacity: 1 !important;
-      z-index: 101 !important; /* 打开时显示在最上层 */
-      transform: translateY(0) !important;
-    }
-
-    /* 确保details元素的summary不会有默认的三角形标记 */
-    #header details[data-mobile-menu] > summary {
-      list-style: none !important;
-    }
-    #header details[data-mobile-menu] > summary::-webkit-details-marker {
-      display: none !important;
-    }
-
-    /* Menu items styling */
-    #header .mobile-menu-container.dropdown .menu {
-      padding: 1rem !important;
-      margin: 0 !important;
-      list-style: none !important;
-    }
-
-    #header .mobile-menu-container.dropdown .menu li {
-      padding: 0.5rem 0 !important;
-      border-bottom: 1px solid #e5e7eb !important;
-    }
-
-    #header .mobile-menu-container.dropdown .menu a {
-      color: #333333 !important;
-      text-decoration: none !important;
-      display: block !important;
-      padding: 0.5rem 0 !important;
-      font-size: 16px !important;
-    }
-
-    /* Prevent body scrolling when menu is open */
-    body.is-active,
-    body.mobile-menu-open {
-      overflow: hidden !important;
-    }
-
-    /* Reset menu state when closed */
-    #header details[data-mobile-menu]:not([open]) > .mobile-menu-container.dropdown {
-      visibility: hidden !important;
-      opacity: 0 !important;
-      z-index: -1 !important;
-      transform: translateY(-10px) !important;
-    }
-
-    /* Ensure smooth transitions */
-    #header details[data-mobile-menu] > .mobile-menu-container.dropdown {
-      transition: visibility 0.3s ease-in-out,
-                  opacity 0.3s ease-in-out,
-                  transform 0.3s ease-in-out,
-                  z-index 0s linear 0.3s !important;
-    }
-
-    #header details[data-mobile-menu][open] > .mobile-menu-container.dropdown {
-      transition: visibility 0s linear 0s,
-                  opacity 0.3s ease-in-out,
-                  transform 0.3s ease-in-out,
-                  z-index 0s linear 0s !important;
-    }
-
+    #header .top-bar--right .icon-bag,
     #header .top-bar--right .top-bar__login-link svg {
-      width: 24px !important;
-      height: 24px !important;
-      color: #ffffff !important; /* Ensure it's white */
-      vertical-align: middle !important;
+      width: 24px;
+      height: 24px;
+      color: #ffffff;
+    }
+
+    /* 菜单按钮样式 */
+    #header .mobile_nav.dropdown_link {
+      display: flex;
+      align-items: center;
+    }
+
+    #header .mobile_nav.dropdown_link .mobile-menu-title {
+      color: #ffffff;
+      margin-left: 8px;
+    }
+
+    /* 购物车数量 */
+    #header .cart_count {
+      color: #ffffff;
+      font-size: 12px;
+    }
+
+    /* 确保所有链接可点击 */
+    #header .top-bar--right a,
+    #header .top-bar--right .cart-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    ul#mobile_menu.menu li a[data-nav-title],
+    ul#mobile_menu.menu li a,
+    ul#mobile_menu.menu li a *,
+    ul#mobile_menu.menu li a span {
+      color: #222 !important;
+    }
+
+    .parent-link--true {
+      color: #222 !important;
+    }
+
+    .mobile-menu-link {
+      color: #222 !important;
     }
   }
 </style>

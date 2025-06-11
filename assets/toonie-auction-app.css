@@ -274,7 +274,7 @@
   }
 
   #header .mobile-menu-container.dropdown .menu a {
-    color: #FFFF00 !important; /* Debug: Menu text yellow */
+    color: #222 !important;
     text-decoration: none !important;
     display: block !important;
     padding: 0.5rem 0 !important;
