@@ -167,6 +167,15 @@
     </a>
 
     <div class="top-bar--right">
+      <a
+        href="https://toonieauction.com/apps/auction-plus/watchlists"
+        class="top-bar__login-link"
+        title="watchlists"
+      >
+        <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 20 20" style="width: 1em; height: 1em; margin-right: .2em; text-align: center; font-size: 1.4em; vertical-align: middle;">
+          <path d="M10 3.25C8.03 1.28 5.06 1.28 3.09 3.25C1.12 5.22 1.12 8.35 3.09 10.32L10 17.23L16.91 10.32C18.88 8.35 18.88 5.22 16.91 3.25C14.94 1.28 11.97 1.28 10 3.25Z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
       {% if section.settings.search_enabled %}
         <a href="{{ routes.search_url }}" class="icon-search dropdown_link" title="{{ 'general.search.title' | t | escape }}" data-dropdown-rel="search"></a>
       {% endif %}
@@ -268,6 +277,18 @@
               %}
             </li>
           {% endif %}
+
+          <li>
+            <a
+              href="https://toonieauction.com/apps/auction-plus/watchlists"
+              class="top-bar__login-link"
+              title="watchlists"
+            >
+              <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 20 20" style="width: 1em; height: 1em; margin-right: .2em; text-align: center; font-size: 1.4em; vertical-align: middle;">
+                <path d="M10 3.25C8.03 1.28 5.06 1.28 3.09 3.25C1.12 5.22 1.12 8.35 3.09 10.32L10 17.23L16.91 10.32C18.88 8.35 18.88 5.22 16.91 3.25C14.94 1.28 11.97 1.28 10 3.25Z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
 
           {% if shop.customer_accounts_enabled %}
             <li>
@@ -777,7 +798,7 @@
       height: 100% !important;
       display: flex !important;
       align-items: center !important;
-      gap: 20px !important;
+      gap: 3px !important; /* Further reduced gap for closer icons */
     }
 
     /* 调整图标大小 */
@@ -888,6 +909,13 @@
                   opacity 0.3s ease-in-out,
                   transform 0.3s ease-in-out,
                   z-index 0s linear 0s !important;
+    }
+
+    #header .top-bar--right .top-bar__login-link svg {
+      width: 24px !important;
+      height: 24px !important;
+      color: #ffffff !important; /* Ensure it's white */
+      vertical-align: middle !important;
     }
   }
 </style>
