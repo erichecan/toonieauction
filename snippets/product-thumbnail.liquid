@@ -85,39 +85,39 @@
     data-load-more--grid-item
   {% endif %}
 >
-  <div class="product-{{ product.id }}">
-    <div class="product-wrap {% if settings.collection_secondary_image != blank and secondaryImage != blank %}has-secondary-media-swap{% endif %}">
-      <div class="relative product_image">
-        <a href="{{ product.url | within: collection }}">
-          <div class="image__container">
-            {% if settings.product_form_style == 'select' %}
+<div class="product-{{ product.id }}">
+  <div class="product-wrap {% if settings.collection_secondary_image != blank and secondaryImage != blank %}has-secondary-media-swap{% endif %}">
+    <div class="relative product_image">
+      <a href="{{ product.url | within: collection }}">
+        <div class="image__container">
+          {% if settings.product_form_style == 'select' %}
+            {%
+              render 'quick-shop-gallery',
+              product: product,
+            %}
+          {% else %}
+            {% if settings.quick_shop_enabled and settings.quick_shop_style == 'inline' and product.selected_or_first_available_variant.image %}
               {%
-                render 'quick-shop-gallery',
-                product: product,
+                render 'image-element',
+                image: product.selected_or_first_available_variant.image,
+                alt: alt_text,
+                lazyload: lazyload,
+                object_fit: align_height,
+                max_height: collection_height,
               %}
             {% else %}
-              {% if settings.quick_shop_enabled and settings.quick_shop_style == 'inline' and product.selected_or_first_available_variant.image %}
-                {%
-                  render 'image-element',
-                  image: product.selected_or_first_available_variant.image,
-                  alt: alt_text,
-                  lazyload: lazyload,
-                  object_fit: align_height,
-                  max_height: collection_height,
-                %}
-              {% else %}
-                {%
-                  render 'image-element',
-                  image: product.featured_media.preview_image,
-                  alt: alt_text,
-                  lazyload: lazyload,
-                  object_fit: align_height,
-                  max_height: collection_height,
-                %}
-              {% endif %}
+              {%
+                render 'image-element',
+                image: product.featured_media.preview_image,
+                alt: alt_text,
+                lazyload: lazyload,
+                object_fit: align_height,
+                max_height: collection_height,
+              %}
             {% endif %}
-          </div>
+          {% endif %}
 
+          {% comment %} 将第二张图片移到image__container内部 {% endcomment %}
           {% if settings.collection_secondary_image != blank and product.media[1] != blank %}
             {% if product.media[1].media_type == 'external_video' %}
               <div
@@ -145,17 +145,18 @@
               %}
             {% endif %}
           {% endif %}
-        </a>
-      </div>
-
-      {%
-        render 'product-details',
-        product: product,
-        collection: collection,
-        collection_handles: collection_handles,
-      %}
+        </div>
+      </a>
     </div>
+
+    {%
+      render 'product-details',
+      product: product,
+      collection: collection,
+      collection_handles: collection_handles,
+    %}
   </div>
+</div>
 
   <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}">
     {%
