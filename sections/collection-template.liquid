@@ -29,6 +29,19 @@
     border-radius: 8px;
     display: block;
   }
+
+  @media only screen and (max-width: 798px) {
+    /* 只缩小拍卖信息的内边距，不动卡片本身 */
+    .auction.auction-container {
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem; /* 上右下左 */
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    /* 如果拍卖信息和卡片底部距离太大，可以缩小拍卖信息底部的 margin/padding */
+    .auction.auction-container .auction-countdown.grid {
+      margin-bottom: 0.2rem;
+    }
+  }
 {% endstyle %}
 
 {%- if collection.products.size > 0 -%}
@@ -269,6 +282,23 @@
   {% endpaginate %}
   </div>
 </section>
+
+<!-- 回到顶部按钮：黑色方块，白色文字，移动端和桌面端都显示，可用 CSS 媒体查询后续定制 -->
+<div id="back-to-top-btn" style="position: fixed; right: 20px; bottom: 40px; z-index: 9999; background: #111; color: #fff; width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: opacity 0.3s; opacity: 0.7;">
+  top
+</div>
+<script>
+  // 平滑滚动到顶部
+  document.getElementById('back-to-top-btn').onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+</script>
+
+<!-- 响应式设计建议：
+1. 用 @media only screen and (max-width: 798px) 针对移动端调整产品卡片、列表、按钮等布局。
+2. 可用 .is-visible--mobile/.is-hidden-desktop-only 等类实现移动端/桌面端专属内容切换。
+3. 如需完全不同的移动端结构，可用 JS 检测屏幕宽度，动态切换内容块。
+-->
 
 {% comment %} Shopify-XR {% endcomment %}
 {% if product.media %}
