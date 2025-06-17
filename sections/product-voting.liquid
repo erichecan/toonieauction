@@ -11,7 +11,7 @@
           <div class="relative">
             {% if product.featured_image %}
               <a href="{{ product.url }}" class="block">
-                <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.featured_image.alt }}" class="product-image">
+              <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.featured_image.alt }}" class="product-image">
               </a>
             {% else %}
               <div class="product-image bg-gray-300 flex items-center justify-center text-gray-500">

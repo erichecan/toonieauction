@@ -189,7 +189,7 @@
   }
 
   #header .top-bar {
-    height: 100px !important;
+    /* height: 100px !important; */
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -226,18 +226,18 @@
 
   /* 调整 logo 样式 */
   #header .mobile_logo.logo {
-    height: 100% !important;
+    /* height: 100% !important; */
     display: flex !important;
     align-items: center !important;
   }
   
   #header .mobile_logo.logo img,
   #header .mobile_logo.logo img.lazyloaded {
-    width: 120px !important;
-    height: 90px !important;
-    max-height: 90px !important;
-    object-fit: fill !important;
-    object-position: initial !important;
+    /* width: 120px !important; */
+    /* height: 90px !important; */
+    /* max-height: 90px !important; */
+    /* object-fit: fill !important; */
+    /* object-position: initial !important; */
   }
 
   /* Mobile Menu Styles */
@@ -305,4 +305,106 @@
 .thumbnail-hover-enabled--true:hover .product-info__caption {
   opacity: 1;
   visibility: visible;
+}
+
+.auction-button.link.font-bold {
+  background: none !important;
+  color: #16a34a !important;
+  border: none !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  text-decoration: underline !important;
+  box-shadow: none !important;
+  border-radius: 6px !important;
+  padding: 0.5em 0.5em !important;
+  margin-bottom: 0.5em !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  transition: color 0.2s !important;
+}
+.auction-button.link.font-bold:hover,
+.auction-button.link.font-bold:focus {
+  color: #15803d !important;
+  text-decoration: underline !important;
+}
+
+.auction-button.register-link {
+  background: #dc2626 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-size: 1.1rem !important;
+  padding: 0.75em 1.5em !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 0.5em !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transition: background 0.2s, box-shadow 0.2s !important;
+}
+.auction-button.register-link:hover,
+.auction-button.register-link:focus {
+  background: #b91c1c !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(220,38,38,0.12) !important;
+}
+
+.auction-button.btn--primary:not(.register-link) {
+  background: #dc2626 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-size: 1.1rem !important;
+  padding: 0.75em 1.5em !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 0.5em !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transition: background 0.2s, box-shadow 0.2s !important;
+}
+.auction-button.btn--primary:not(.register-link):hover,
+.auction-button.btn--primary:not(.register-link):focus {
+  background: #b91c1c !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(220,38,38,0.12) !important;
+}
+
+.tr-follow-button .auction-button,
+.auction-button.flex.link {
+  background: #dc2626 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-size: 1.1rem !important;
+  padding: 0.75em 1.5em !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 0.5em !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transition: background 0.2s, box-shadow 0.2s !important;
+}
+.tr-follow-button .auction-button:hover,
+.tr-follow-button .auction-button:focus,
+.auction-button.flex.link:hover,
+.auction-button.flex.link:focus {
+  background: #b91c1c !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(220,38,38,0.12) !important;
 } 
