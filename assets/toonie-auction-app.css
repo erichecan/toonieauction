@@ -243,7 +243,7 @@
   /* Mobile Menu Styles */
   #header .mobile-menu-container.dropdown {
     position: fixed !important; /* Forced fixed positioning */
-    top: 100px !important; /* Starts below header */
+    top: 60px !important; /* Starts below header */
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important; /* Fills remaining viewport height */
